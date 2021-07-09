@@ -1,0 +1,6 @@
+# curl 'https://discovery.etcd.io/new?size=3' 生成一个 discovery 的地址
+# Use goreman to run `go get github.com/mattn/goreman`
+# 这是 etcd 自发现模式，利用一个已存在的 etcd 集群去启动一个新的 etcd 集群
+etcd1: bin/etcd --name infra1 --listen-client-urls http://127.0.0.1:2379 --advertise-client-urls http://127.0.0.1:2379 --listen-peer-urls http://127.0.0.1:12380 --initial-advertise-peer-urls http://127.0.0.1:12380 --initial-cluster-token etcd-cluster-1 --discovery https://discovery.etcd.io/012090fd5fe312b932c54795986add44 --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr
+etcd2: bin/etcd --name infra2 --listen-client-urls http://127.0.0.1:22379 --advertise-client-urls http://127.0.0.1:22379 --listen-peer-urls http://127.0.0.1:22380 --initial-advertise-peer-urls http://127.0.0.1:22380 --initial-cluster-token etcd-cluster-1 --discovery https://discovery.etcd.io/012090fd5fe312b932c54795986add44 --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr
+etcd3: bin/etcd --name infra3 --listen-client-urls http://127.0.0.1:32379 --advertise-client-urls http://127.0.0.1:32379 --listen-peer-urls http://127.0.0.1:32380 --initial-advertise-peer-urls http://127.0.0.1:32380 --initial-cluster-token etcd-cluster-1 --discovery https://discovery.etcd.io/012090fd5fe312b932c54795986add44 --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr
